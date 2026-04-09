@@ -1,324 +1,296 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Axial Flux Motor">
 
-	<!-- ── Header ── -->
-	<section class="section">
-		<p class="section-label">Personal Project</p>
-		<h1>⚙️ Axial Flux Motor</h1>
-		<p class="subtitle">
-			A hand-built brushless motor exploring axial flux geometry — 3D printed, hand-wound, and actually spinning.
-		</p>
-		<div class="meta-row">
-			<span class="chip">Fusion 360</span>
-			<span class="chip">3D Printing</span>
-			<span class="chip">Electromagnetics</span>
-			<span class="chip">ESC</span>
-			<span class="chip">Solo Build</span>
-		</div>
-	</section>
+<!-- ── Header ── -->
+<section class="section">
+<p class="section-label">Engineering Class Project</p>
+<h1>⚙️ Axial Flux Motor</h1>
+<p class="subtitle">Spinning chakras 𖣐</p>
+<div class="meta-row">
+<span class="chip">Fusion 360</span>
+<span class="chip">3D Printing</span>
+<span class="chip">Electromagnetics</span>
+<span class="chip">ESC</span>
+</div>
+</section>
 
-	<hr class="divider" />
+<hr class="divider" />
 
-	<!-- ── What is Axial Flux ── -->
-	<section class="section">
-		<p class="section-label">The Concept</p>
-		<h2>What is Axial Flux?</h2>
-		<p>
-			In a conventional (radial flux) motor, the magnetic field travels outward from the centre of the rotor. Axial flux flips this: the field runs along the axis of rotation instead, meaning the stator and rotor face each other like two plates rather than wrapping around each other like a tube.
-		</p>
-		<p class="para-gap">
-			This geometry is used extensively in EVs, drones, and supercars. It delivers higher torque and power density because the magnetic path through the stator is shorter and more direct. The flat, open winding layout also gives good natural airflow around the coils for passive cooling.
-		</p>
-		<p class="para-gap">
-			The tradeoffs: tighter mechanical tolerances, more complex winding geometry, and scaling up introduces real challenges with mechanical stress on the rotor disc. This was a Faraday's Disk moment for me — the same principle that Faraday demonstrated in 1831, now built on a 3D printer.
-		</p>
-	</section>
+<!-- ── What & Why ── -->
+<section class="section">
+<p class="section-label">The Design</p>
+<h2>What is Axial Flux?</h2>
+<p>
+In a conventional radial motor the magnetic field travels outward from the centre of the rotor. Axial flux flips this: the field runs along the axis of rotation, so the stator and rotor face each other like two plates. The magnetic path is shorter and more direct, which gives higher torque and power density. The flat open winding layout also lets air move around the coils naturally.
+</p>
+<p class="para-gap">
+This geometry is used in EVs, drones, and supercars. Faraday demonstrated the same basic principle in 1831.
+</p>
+<p class="para-gap">
+When the class project came up to build a motor, I just found this design really cool. It looks like a chakra or a spinning disc. I enjoyed reading about the history of it and wanted to build one.
+</p>
 
-	<hr class="divider" />
+<div class="figures-stack">
+<figure class="figure">
+<img src="/images/axialvsradialflux.jpg" alt="Axial vs radial flux motor comparison" class="figure-img" />
+<figcaption>Axial vs radial flux geometry. In axial designs the field path runs along the axis rather than outward from the centre.</figcaption>
+</figure>
+<figure class="figure">
+<img src="/images/historicalaxialflux.jpg" alt="Historical axial flux motor" class="figure-img" />
+<figcaption>Early axial flux motor. Faraday's disk experiment of 1831 demonstrated the same principle this design is built on.</figcaption>
+</figure>
+</div>
+</section>
 
-	<!-- ── Build Specs ── -->
-	<section class="section">
-		<p class="section-label">Hardware</p>
-		<h2>What I Built</h2>
-		<div class="specs-grid">
-			<div class="spec-block">
-				<h3>Mechanical</h3>
-				<ul class="goal-list">
-					<li>1 bearing, 3D-printed shaft</li>
-					<li>3D-printed rotor discs and independent spool bodies for each winding</li>
-					<li>Total weight: ~250g</li>
-					<li>Compact axial layout with magnetic and electrical symmetry for smoother rotation</li>
-				</ul>
-			</div>
-			<div class="spec-block">
-				<h3>Magnetics</h3>
-				<ul class="goal-list">
-					<li>16 neodymium magnets, alternating orientation around the rotor</li>
-					<li>Doubled-up magnets on the rotor to increase field strength</li>
-					<li>Axial field path through facing stator coils</li>
-				</ul>
-			</div>
-			<div class="spec-block">
-				<h3>Electrical</h3>
-				<ul class="goal-list">
-					<li>Six 150-turn coils, 28-gauge copper wire, 2A max per coil</li>
-					<li>Operating voltage: 15V nominal</li>
-					<li>Current draw: ~300mA under typical load</li>
-					<li>ESC (Electronic Speed Controller) for speed regulation and constant voltage supply</li>
-				</ul>
-			</div>
-		</div>
-	</section>
+<hr class="divider" />
 
-	<hr class="divider" />
+<!-- ── What We Built ── -->
+<section class="section">
+<p class="section-label">The Build</p>
+<h2>What We Made</h2>
+<div class="specs-grid">
+<div class="spec-block">
+<h3>Mechanical</h3>
+<ul class="goal-list">
+<li>1 bearing, 3D-printed shaft</li>
+<li>3D-printed rotor discs and independent spool bodies for each winding</li>
+<li>Total weight: ~250g</li>
+<li>Lightweight and easy to disassemble and rewind</li>
+</ul>
+</div>
+<div class="spec-block">
+<h3>Magnetics</h3>
+<ul class="goal-list">
+<li>16 neodymium magnets, alternating orientation around the rotor</li>
+<li>Doubled up magnets to increase field strength</li>
+<li>Axial field path through facing stator coils</li>
+</ul>
+</div>
+<div class="spec-block">
+<h3>Electrical</h3>
+<ul class="goal-list">
+<li>Six 150-turn coils, 28-gauge copper wire, 2A max per coil</li>
+<li>Operating voltage: 15V nominal</li>
+<li>Current draw: ~300mA under typical load</li>
+<li>ESC for speed regulation and constant voltage supply</li>
+</ul>
+</div>
+</div>
+</section>
 
-	<!-- ── Design Photos ── -->
-	<section class="section">
-		<p class="section-label">The Design</p>
-		<h2>Photos</h2>
-		<div class="figures-stack">
-			<figure class="figure">
-				<img src="/images/motordesign.png" alt="Axial flux motor design" class="figure-img" />
-				<figcaption>The assembled motor showing the 3D-printed rotor disc, neodymium magnets in alternating orientation, and the hand-wound stator coils.</figcaption>
-			</figure>
-			<figure class="figure">
-				<img src="/images/motordesign2.png" alt="Axial flux motor second design view" class="figure-img" />
-				<figcaption>Second design view showing the shaft and bearing arrangement and the spacing between the two rotor faces.</figcaption>
-			</figure>
-		</div>
-	</section>
+<hr class="divider" />
 
-	<hr class="divider" />
+<!-- ── How It Came Together ── -->
+<section class="section">
+<p class="section-label">The Process</p>
+<h2>How It Came Together</h2>
+<p>
+Everything was modelled in Fusion 360. The geometry came from research papers since proper hobbyist documentation for axial flux motors barely exists. Winding tutorials in particular are nonexistent at this level, so we figured it out ourselves through trial and error.
+</p>
+<p class="para-gap">
+The shaft went through a few redesigns to find a version stable enough to support the rotor without wobble. We doubled up the magnets on the rotor after testing showed the single layer was not producing enough field strength.
+</p>
+<p class="para-gap">
+Honestly it came together more smoothly than expected. The most involved part was getting the windings to align correctly with the ESC, but even that sorted itself out. It also felt more engaging to learn when we were doing the unconventional thing.
+</p>
 
-	<!-- ── Build Process ── -->
-	<section class="section">
-		<p class="section-label">The Process</p>
-		<h2>How It Came Together</h2>
-		<p>
-			The design started from research papers — there's surprisingly little hobbyist documentation on axial flux motors compared to conventional radial designs. I modelled everything in Fusion 360 and worked out the geometry from first principles.
-		</p>
-		<p class="para-gap">
-			Winding the coils was the hardest part. Proper winding tutorials for axial flux simply don't exist online at the hobbyist level, so I figured it out through trial and error. The shaft went through multiple redesigns to find a geometry stable enough to support a heavier rotor without wobble.
-		</p>
-	</section>
+<div class="figures-stack">
+<figure class="figure">
+<img src="/images/axialmotorsketch.png" alt="Sketch of the axial flux motor design" class="figure-img sketch-img" />
+<figcaption>Early sketch of the motor layout showing the axial field path, rotor disc, and coil arrangement.</figcaption>
+</figure>
+<figure class="figure">
+<img src="/images/motordesign.png" alt="Axial flux motor assembled" class="figure-img" />
+<figcaption>The assembled motor showing the rotor disc, neodymium magnets in alternating orientation, and the hand-wound stator coils.</figcaption>
+</figure>
+<figure class="figure">
+<img src="/images/motordesign2.png" alt="Axial flux motor from another angle" class="figure-img" />
+<figcaption>Shaft and bearing arrangement, showing the spacing between the two rotor faces.</figcaption>
+</figure>
+</div>
+</section>
 
-	<hr class="divider" />
+<hr class="divider" />
 
-	<!-- ── Challenges & Solutions ── -->
-	<section class="section">
-		<p class="section-label">Iteration</p>
-		<h2>Challenges & What I Did About Them</h2>
-		<div class="challenge-list">
-			<div class="challenge-item">
-				<div class="challenge-col problem">
-					<p class="col-label">Problem</p>
-					<p>Heavy rotor resulted in low torque output</p>
-				</div>
-				<div class="challenge-col solution">
-					<p class="col-label">Fix</p>
-					<p>Redesigned the rotor to be as light as possible to push torque up</p>
-				</div>
-			</div>
-			<div class="challenge-item">
-				<div class="challenge-col problem">
-					<p class="col-label">Problem</p>
-					<p>Large air gap between shaft and rotor limited rotational speed</p>
-				</div>
-				<div class="challenge-col solution">
-					<p class="col-label">Fix</p>
-					<p>Reduced the air gap by 1mm to tighten the magnetic coupling</p>
-				</div>
-			</div>
-			<div class="challenge-item">
-				<div class="challenge-col problem">
-					<p class="col-label">Problem</p>
-					<p>Uneven shaft tolerances — motor couldn't spin continuously</p>
-				</div>
-				<div class="challenge-col solution">
-					<p class="col-label">Fix</p>
-					<p>Standardised the winding geometry to 150 turns uniform across all coils</p>
-				</div>
-			</div>
-			<div class="challenge-item">
-				<div class="challenge-col problem">
-					<p class="col-label">Problem</p>
-					<p>Hall effect sensor polling frequency too slow to measure RPM at motor speeds</p>
-				</div>
-				<div class="challenge-col solution">
-					<p class="col-label">Fix</p>
-					<p>Trialled an electronic RPM measurement solution; documented the limitation for future iterations</p>
-				</div>
-			</div>
-		</div>
-	</section>
+<!-- ── Challenges ── -->
+<section class="section">
+<p class="section-label">Iteration</p>
+<h2>Problems Along the Way</h2>
+<ul class="problems-list">
+<li>
+<strong>Heavy rotor produced low torque.</strong> Redesigned it to be as light as possible.
+</li>
+<li>
+<strong>Large air gap between shaft and rotor was limiting speed.</strong> Reduced by 1mm to tighten the magnetic coupling.
+</li>
+<li>
+<strong>Uneven shaft tolerances meant it would not spin continuously.</strong> Standardised all coils to 150 turns for uniform winding geometry.
+</li>
+<li>
+<strong>Hall effect sensor polling was too slow to keep up with motor speed.</strong> Documented as a known limitation for future work.
+</li>
+</ul>
 
-	<hr class="divider" />
+<figure class="figure video-figure">
+<video controls class="figure-vid" preload="metadata">
+<source src="/images/motortroubleshooting.mp4" type="video/mp4" />
+</video>
+<figcaption>Working through winding alignment issues during iteration.</figcaption>
+</figure>
+</section>
 
-	<!-- ── Videos ── -->
-	<section class="section">
-		<p class="section-label">In Action</p>
-		<h2>Videos</h2>
-		<div class="figures-stack">
-			<figure class="figure">
-				<video controls class="figure-img" preload="metadata">
-					<source src="/images/motor.mp4" type="video/mp4" />
-				</video>
-				<figcaption>The motor running under ESC control at 15V nominal.</figcaption>
-			</figure>
-			<figure class="figure">
-				<video controls class="figure-img" preload="metadata">
-					<source src="/images/motortroubleshooting.mp4" type="video/mp4" />
-				</video>
-				<figcaption>Troubleshooting the shaft wobble and air gap issues during iteration.</figcaption>
-			</figure>
-		</div>
-	</section>
+<hr class="divider" />
+
+<!-- ── Result ── -->
+<section class="section">
+<p class="section-label">The Result</p>
+<h2>Our Axial Flux Motor in Action</h2>
+<p>
+It spins well. Actually, it spins hard enough that it hurt to hold. We pushed the voltage past nominal and it handled it fine. Lightweight, agile, and it works.
+</p>
+<figure class="figure video-figure">
+<video controls class="figure-vid" preload="metadata">
+<source src="/images/motor.mp4" type="video/mp4" />
+</video>
+<figcaption>The finished motor running under ESC control at 15V nominal.</figcaption>
+</figure>
+</section>
 
 </Layout>
 
 <style>
-	h1 {
-		font-size: 2.2rem;
-		letter-spacing: -0.03em;
-		margin-bottom: 0.6rem;
-	}
+h1 {
+font-size: 2.2rem;
+letter-spacing: -0.03em;
+margin-bottom: 0.6rem;
+}
 
-	.subtitle {
-		color: var(--color-text-muted);
-		font-size: 1.05rem;
-		margin-bottom: 1rem;
-		max-width: 620px;
-	}
+.subtitle {
+color: var(--color-text-muted);
+font-size: 1.05rem;
+margin-bottom: 1rem;
+max-width: 620px;
+}
 
-	.meta-row {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.4rem;
-		margin-top: 0.5rem;
-	}
+.meta-row {
+display: flex;
+flex-wrap: wrap;
+gap: 0.4rem;
+margin-top: 0.5rem;
+}
 
-	.para-gap {
-		margin-top: 1rem;
-	}
+.para-gap {
+margin-top: 1rem;
+}
 
-	/* ── Specs grid ── */
-	.specs-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		gap: 1.5rem;
-		margin-top: 1rem;
-	}
+.specs-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 1.5rem;
+margin-top: 1rem;
+}
 
-	.spec-block h3 {
-		font-size: 0.95rem;
-		font-weight: 600;
-		color: var(--color-accent-light);
-		margin-bottom: 0.6rem;
-	}
+.spec-block h3 {
+font-size: 0.95rem;
+font-weight: 600;
+color: var(--color-accent-light);
+margin-bottom: 0.6rem;
+}
 
-	.goal-list {
-		list-style: none;
-		padding: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
+.goal-list {
+list-style: none;
+padding: 0;
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
+}
 
-	.goal-list li {
-		font-size: 0.9rem;
-		color: var(--color-text-muted);
-		padding-left: 1rem;
-		position: relative;
-		line-height: 1.5;
-	}
+.goal-list li {
+font-size: 0.9rem;
+color: var(--color-text-muted);
+padding-left: 1rem;
+position: relative;
+line-height: 1.5;
+}
 
-	.goal-list li::before {
-		content: '–';
-		position: absolute;
-		left: 0;
-		color: var(--color-accent);
-	}
+.goal-list li::before {
+content: '\2013';
+position: absolute;
+left: 0;
+color: var(--color-accent);
+}
 
-	/* ── Figures ── */
-	.figure {
-		margin-top: 1.5rem;
-	}
+.problems-list {
+list-style: none;
+padding: 0;
+margin-top: 1rem;
+display: flex;
+flex-direction: column;
+gap: 0.75rem;
+}
 
-	.figures-stack {
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
-		margin-top: 1.5rem;
-	}
+.problems-list li {
+font-size: 0.95rem;
+color: var(--color-text-muted);
+line-height: 1.65;
+padding-left: 1.25rem;
+position: relative;
+}
 
-	.figure-img {
-		width: 100%;
-		border-radius: 8px;
-		display: block;
-		border: 1px solid var(--color-border);
-	}
+.problems-list li::before {
+content: '\2013';
+position: absolute;
+left: 0;
+color: var(--color-accent);
+}
 
-	figcaption {
-		font-size: 0.82rem;
-		color: var(--color-text-muted);
-		margin-top: 0.6rem;
-		font-style: italic;
-		line-height: 1.5;
-	}
+.problems-list strong {
+color: var(--color-text);
+}
 
-	/* ── Challenges ── */
-	.challenge-list {
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-		margin-top: 1rem;
-	}
+.figure {
+margin-top: 1.5rem;
+}
 
-	.challenge-item {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 1rem;
-		background: var(--color-surface);
-		border: 1px solid var(--color-border);
-		border-radius: 10px;
-		padding: 1rem 1.25rem;
-	}
+.figures-stack {
+display: flex;
+flex-direction: column;
+gap: 2rem;
+margin-top: 1.5rem;
+}
 
-	.challenge-col p {
-		font-size: 0.9rem;
-		line-height: 1.55;
-	}
+.figure-img {
+width: 100%;
+border-radius: 8px;
+display: block;
+border: 1px solid var(--color-border);
+}
 
-	.col-label {
-		font-size: 0.72rem;
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		margin-bottom: 0.3rem !important;
-	}
+.sketch-img {
+max-width: 480px;
+}
 
-	.problem .col-label {
-		color: #e57373;
-	}
+.video-figure {
+max-width: 560px;
+margin-top: 1.5rem;
+}
 
-	.solution .col-label {
-		color: var(--color-accent-light);
-	}
+.figure-vid {
+width: 100%;
+border-radius: 8px;
+display: block;
+border: 1px solid var(--color-border);
+background: #000;
+}
 
-	.problem p:last-child {
-		color: var(--color-text-muted);
-	}
-
-	.solution p:last-child {
-		color: var(--color-text-muted);
-	}
-
-	@media (max-width: 540px) {
-		.challenge-item {
-			grid-template-columns: 1fr;
-		}
-	}
+figcaption {
+font-size: 0.82rem;
+color: var(--color-text-muted);
+margin-top: 0.6rem;
+font-style: italic;
+line-height: 1.5;
+}
 </style>
