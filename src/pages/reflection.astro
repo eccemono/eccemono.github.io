@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Reflection">
+	<section class="section">
+		<p class="section-label">Personal Reflection</p>
+		<h1>Looking Back, Moving Forward</h1>
+		<p class="subtitle">A first-person reflection on learning, growth, and what it means to be a professional engineer.</p>
+	</section>
+
+	<hr class="divider" />
+
+	<article class="reflection-body">
+
+		<section class="q-section">
+			<p class="section-label">On Design</p>
+			<h2>What did you learn about the design process?</h2>
+			<p>
+				I learned that the problem defines the solution, not the other way around. When we started, the answer seemed obvious: take a photo, count. But the moment I actually looked at what we were imaging, small semi-translucent shells on a textured surface, everything changed. We needed a controlled environment, a fixed geometry, a proper lens. The project kept redirecting us back to the actual problem, and that is something I will carry into every project I take on.
+			</p>
+		</section>
+
+		<hr class="divider" />
+
+		<section class="q-section">
+			<p class="section-label">On Engineering</p>
+			<h2>What are the most important attributes of an engineer?</h2>
+			<p>
+				I think it's being human. Sure, this project would give me a grade at the end of the day and I could have treated it as just a task to get done. But going there, interacting with the client and hearing the lab tech changed that. It may not be world changing, but counting exuvia is a genuine issue they have, and they seemed so excited to see it being potentially solved. From that moment on, it was less an engineering job and more my duty to ensure I don't cut any corners and give them the best functioning exuvia counter I can.
+			</p>
+		</section>
+
+		<hr class="divider" />
+
+		<section class="q-section">
+			<p class="section-label">On Responsibility</p>
+			<h2>How has this experience shaped your understanding of the engineer's role in society?</h2>
+			<p>
+				Engineers have the power to shape the world. We can sharpen our skills and use them to hear people, understand their struggles, and think about how we can play a part in helping them out. Our client wasn't asking for a machine learning pipeline. They were asking to stop counting tiny shells by hand. That gap between what I could build and what they actually needed taught me what engineering responsibility looks like in practice.
+			</p>
+		</section>
+
+		<hr class="divider" />
+
+		<section class="q-section">
+			<p class="section-label">On Growth</p>
+			<h2>Strengths, growth areas, and a path forward</h2>
+			<p>
+				I think I listen to the client's problems and am very much a perspectivist. I won't stop until I feel like I have totally understood what they're looking for. The more open-ended the better: I will consult whatever I need to, build a prototype, and give it to them in a way they will actually be able to make use and sense out of. Where I need to grow is in formally communicating that work. Writing it up, presenting it persuasively. I plan to be more deliberate about documentation as I go, rather than treating it as something to do at the end.
+			</p>
+		</section>
+
+	</article>
+</Layout>
+
+<style>
+	h1 {
+		font-size: 2rem;
+		letter-spacing: -0.03em;
+		margin-bottom: 0.5rem;
+	}
+
+	.subtitle {
+		color: var(--color-text-muted);
+		font-size: 1rem;
+		margin-top: 0.4rem;
+		max-width: 580px;
+	}
+
+	.reflection-body {
+		max-width: 680px;
+	}
+
+	.q-section {
+		margin-bottom: 0.5rem;
+	}
+
+	.q-section h2 {
+		font-size: 1.25rem;
+		margin-bottom: 1rem;
+		color: var(--color-text);
+	}
+
+	.q-section p {
+		color: var(--color-text-muted);
+		line-height: 1.85;
+		font-size: 0.97rem;
+	}
+</style>

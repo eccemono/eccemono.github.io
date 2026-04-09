@@ -1,23 +1,214 @@
+---
+interface Props {
+	title: string;
+}
+const { title } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title} | ePortfolio</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
-		<slot />
+		<nav>
+			<div class="nav-inner">
+				<a href="/" class="nav-brand">🐵 eccemono</a>
+				<ul>
+					<li><a href="/" class={currentPath === '/' ? 'active' : ''}>About Me</a></li>
+					<li><a href="/project" class={currentPath === '/project' ? 'active' : ''}>🐛 Exuvia Counting</a></li>
+
+				</ul>
+			</div>
+		</nav>
+
+		<main>
+			<slot />
+		</main>
+
+		<footer>
+			<p>© 2026 Shreyas · UBC Okanagan · Electrical Engineering</p>
+		</footer>
 	</body>
 </html>
 
-<style>
-	html,
-	body {
+<style is:global>
+	:root {
+		--color-bg: #0f1117;
+		--color-surface: #1a1d27;
+		--color-border: #2a2d3a;
+		--color-accent: #6c63ff;
+		--color-accent-light: #8b83ff;
+		--color-text: #e8eaf0;
+		--color-text-muted: #8b8fa8;
+		--font: 'Inter', sans-serif;
+		--max-width: 900px;
+	}
+
+	*, *::before, *::after {
+		box-sizing: border-box;
 		margin: 0;
+		padding: 0;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		background: var(--color-bg);
+		color: var(--color-text);
+		font-family: var(--font);
+		font-size: 1rem;
+		line-height: 1.7;
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+
+	main {
+		flex: 1;
 		width: 100%;
-		height: 100%;
+		max-width: var(--max-width);
+		margin: 0 auto;
+		padding: 3rem 1.5rem;
+	}
+
+	h1, h2, h3 {
+		line-height: 1.2;
+		font-weight: 700;
+	}
+
+	a {
+		color: var(--color-accent-light);
+		text-decoration: none;
+	}
+
+	a:hover {
+		text-decoration: underline;
+	}
+
+	/* ── Nav ── */
+	nav {
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		background: rgba(15, 17, 23, 0.85);
+		backdrop-filter: blur(12px);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.nav-inner {
+		max-width: var(--max-width);
+		margin: 0 auto;
+		padding: 1rem 1.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.nav-brand {
+		font-weight: 700;
+		font-size: 1.1rem;
+		color: var(--color-text);
+		letter-spacing: -0.02em;
+	}
+
+	.nav-brand:hover {
+		text-decoration: none;
+		color: var(--color-accent-light);
+	}
+
+	nav ul {
+		list-style: none;
+		display: flex;
+		gap: 2rem;
+	}
+
+	nav ul a {
+		color: var(--color-text-muted);
+		font-size: 0.9rem;
+		font-weight: 500;
+		transition: color 0.2s;
+	}
+
+	nav ul a:hover,
+	nav ul a.active {
+		color: var(--color-text);
+		text-decoration: none;
+	}
+
+	nav ul a.active {
+		color: var(--color-accent-light);
+	}
+
+	/* ── Footer ── */
+	footer {
+		text-align: center;
+		padding: 2rem;
+		color: var(--color-text-muted);
+		font-size: 0.85rem;
+		border-top: 1px solid var(--color-border);
+	}
+
+	/* ── Shared section styles ── */
+	.section {
+		margin-bottom: 3.5rem;
+	}
+
+	.section-label {
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-accent-light);
+		margin-bottom: 0.75rem;
+	}
+
+	.section h2 {
+		font-size: 1.6rem;
+		margin-bottom: 1rem;
+	}
+
+	.divider {
+		border: none;
+		border-top: 1px solid var(--color-border);
+		margin: 3rem 0;
+	}
+
+	.chip {
+		display: inline-block;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: 999px;
+		padding: 0.25rem 0.75rem;
+		font-size: 0.8rem;
+		color: var(--color-text-muted);
+		margin: 0.25rem;
+	}
+
+	.placeholder-image {
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		background: var(--color-surface);
+		border: 2px dashed var(--color-border);
+		border-radius: 12px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		color: var(--color-text-muted);
+		font-size: 0.9rem;
 	}
 </style>

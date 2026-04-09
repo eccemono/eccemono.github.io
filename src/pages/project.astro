@@ -1,0 +1,533 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Project">
+	<!-- ── Header ── -->
+	<section class="section">
+		<p class="section-label">Capstone Project · Group i26 · 2025–26</p>
+		<h1>🐛 OKSIR Exuvia Counter</h1>
+		<p class="subtitle">
+			Automating the counting of coddling moth exuvia for BC's sterile insect release program. Faster, more accurate, and actually enjoyable to use.
+		</p>
+		<div class="meta-row">
+			<span class="chip">Computer Vision</span>
+			<span class="chip">Raspberry Pi 5</span>
+			<span class="chip">YOLO11</span>
+			<span class="chip">Streamlit</span>
+			<span class="chip">Team of 5</span>
+		</div>
+	</section>
+
+	<hr class="divider" />
+
+	<!-- ── Plain-language overview ── -->
+	<section class="section">
+		<p class="section-label">The Big Picture</p>
+		<h2>The Okanagan Apple Has an Enemy 🍎</h2>
+		<p>
+			The Okanagan apple is a premium, crisp and sweet delicacy. It's not just a fruit, but a symbol of identity and a proud export of the Okanagan valley. One of the biggest threats to that apple crop is a small, relentless pest: the <strong>Coddling Moth</strong>, which burrows into fruit and devastates farmer yields.
+		</p>
+		<p class="para-gap">
+			Rather than resorting to pesticides, the <strong>Okanagan Kootenay Sterile Insect Release (OKSIR)</strong> program takes a biological approach: they breed millions of sterile coddling moths and release them into orchards, where they mate with wild moths without producing offspring, suppressing wild populations by up to 90%. At their facility in Osoyoos, OKSIR produces <strong>2 million moths every single day</strong>. That's nearly 20 moths released for each Kelowna resident, every single day.
+		</p>
+		<p class="para-gap">
+			But how do you verify you've produced 2 million moths? One method is to count the <em>exuvia</em>, the shed exoskeleton shells larvae leave behind when they metamorphose. Staff at OKSIR manually count each tray, dividing it into four sections, counting one and multiplying by four to estimate the total. This takes time and is not super accurate as it is prone to human error. We've heard from staff on how it's just not a fun process. It requires a whole staff member dedicated to just counting exuvia during the summer. This is where we come in.
+		</p>
+		<figure class="figure">
+			<img src="/images/quartercounting.png" alt="Staff at OKSIR doing the old quarter-sampling method by hand" class="figure-img" />
+			<figcaption>The old way: staff manually dividing trays into four quadrants and counting one section by hand before scaling up. Tedious, error-prone, and takes up a full person's summer.</figcaption>
+		</figure>
+		<figure class="figure">
+			<img src="/images/oksir.png" alt="Team visit at the OKSIR facility in Osoyoos" class="figure-img" />
+			<figcaption>Visiting OKSIR's facility in Osoyoos. Seeing the scale of the operation in person, and speaking with the lab technicians, shaped how we approached the whole project.</figcaption>
+		</figure>
+	</section>
+	<section class="section">
+		<p class="section-label">Design Requirements</p>
+		<h2>What OKSIR Needed</h2>
+		<ul class="goal-list">
+			<li><strong>Accuracy & Speed</strong>: at minimum, outperform the manual 4-quadrant estimation method in both accuracy and time.</li>
+			<li><strong>Data Exportability</strong>: count data and batch statistics had to be easily accessible and exportable by OKSIR staff.</li>
+			<li><strong>User Friendliness</strong>: the solution had to be genuinely easy to use; not just functional, but something staff would actually want to pick up each day.</li>
+			<li><strong>Documentation</strong>: an open build procedure and user manual for long-term maintainability without ongoing engineering support.</li>
+		</ul>
+	</section>
+
+	<hr class="divider" />
+
+	<!-- ── Design Iterations ── -->
+	<section class="section">
+		<p class="section-label">The Journey</p>
+		<h2>How We Got There</h2>
+		<p>
+			Our design went through three meaningful iterations, shaped by direct feedback from OKSIR, the physical constraints of the imaging environment, and the demands of the computer vision model itself.
+		</p>
+
+		<div class="timeline">
+
+			<!-- v1 -->
+			<div class="iteration">
+				<div class="iteration-header">
+					<span class="iteration-badge">v1</span>
+					<h3>The Simple Idea</h3>
+				</div>
+				<p>
+					The original concept was straightforward: use a phone or a simple camera setup to photograph trays and feed images into a counting algorithm. It seemed reasonable at first. But the moment we actually looked at exuvia under real-world conditions, the idea fell apart. Exuvia are small, semi-translucent insect shells, easily lost against a noisy tray background. Casual photography produced blurry, inconsistent images that a computer vision model simply couldn't reliably interpret. We needed a controlled imaging environment: consistent lighting, fixed geometry, known focal length.
+				</p>
+				<figure class="figure">
+					<img src="/images/priortray.png" alt="Exuvia tray captured with overhead camera showing poor image quality" class="figure-img" />
+					<figcaption>An exuvia tray captured with an overhead phone camera. The semi-translucent shells blend into the tray texture, illustrating why casual photography quickly proved insufficient.</figcaption>
+				</figure>
+			</div>
+
+			<!-- v2 -->
+			<div class="iteration">
+				<div class="iteration-header">
+					<span class="iteration-badge">v2</span>
+					<h3>Building the Box and Hitting a Wall</h3>
+				</div>
+				<p>
+					We designed and built an illuminated imaging enclosure: an aluminium-rail frame with vinyl-coated panels, lined internally with evenly distributed white and UV LEDs to create stable, diffuse lighting. The initial Raspberry Pi Camera Module was mounted underneath the top panel, fixed and pointing downward at the tray.
+				</p>
+				<p class="para-gap">
+					Two problems emerged quickly. First, the Pi camera module produced blurry images, inadequate for counting small objects at the required density. We upgraded to the <strong>Raspberry Pi HQ Camera</strong> paired with a 12-megapixel factory automation iris lens via C-mount, the kind of optics used in industrial machine vision, because 50% of good computer vision is simply good vision. The second problem was geometric: with the camera mounted flush under the top, it clipped the outer edges of the tray. Full trays weren't being imaged.
+				</p>
+			</div>
+
+			<!-- v3 -->
+			<div class="iteration">
+				<div class="iteration-header">
+					<span class="iteration-badge">v3</span>
+					<h3>The Overhead Mount: Final Design</h3>
+				</div>
+				<p>
+					The fix required rethinking the camera position entirely. I cut an aperture in the top panel and designed a 3D-printed overhead mount that positions the lens above the box, looking down through the opening. This gave enough vertical clearance to image the full tray in a single frame. The mount also exposes the three manual adjustment rings on the FA iris lens (focus, iris, and zoom), making on-site calibration against a real tray practical and accessible rather than buried inside the enclosure.
+				</p>
+				<p class="para-gap">
+					The resulting setup produces sharp, full-frame, consistently lit images of every tray in the same orientation, with known focus and controlled exposure. Exactly what a YOLO model needs to perform reliably across different batches and operators.
+				</p>
+				<figure class="figure">
+					<img src="/images/boxwith3dprintedmountontop.png" alt="Final imaging enclosure with 3D-printed overhead camera mount" class="figure-img" />
+					<figcaption>Final camera mount: a 3D-printed overhead rig exposing the three manual lens adjustment rings for on-site calibration, with sufficient clearance for full-tray imaging.</figcaption>
+				</figure>
+				<figure class="figure">
+					<img src="/images/adjustingcameralens.gif" alt="Adjusting the focus, iris, and zoom rings on the FA lens" class="figure-img" />
+					<figcaption>Manually dialling in focus, iris, and zoom on the factory automation lens. Getting this right on-site, against a real tray, was what made consistent detection possible.</figcaption>
+				</figure>
+			</div>
+
+		</div>
+	</section>
+
+	<hr class="divider" />
+
+	<!-- ── Technical Deep-Dive ── -->
+	<section class="section">
+		<p class="section-label">Technical Details</p>
+		<h2>For the Engineers</h2>
+		<p>
+			The system has three core components operating in sequence: the imaging hardware, the compute platform, and the CV pipeline.
+		</p>
+
+		<div class="tech-stack">
+			<div class="tech-block">
+				<h3>Imaging Hardware</h3>
+				<ul class="goal-list">
+					<li>Raspberry Pi HQ Camera sensor (12.3 MP Sony IMX477)</li>
+					<li>12 MP FA iris lens, fixed focal length, C-mount to HQ Camera</li>
+					<li>White + UV LED array inside aluminium enclosure for diffuse, consistent illumination</li>
+					<li>Full-resolution stills via <code>rpicam-jpeg</code>; live focus preview via <code>rpicam-still</code> timelapse stream</li>
+				</ul>
+			</div>
+			<div class="tech-block">
+				<h3>Compute Platform</h3>
+				<ul class="goal-list">
+					<li>Raspberry Pi 5, headless on boot via <code>systemd</code> service</li>
+					<li>Accessible on-device or over LAN / Tailscale from any browser</li>
+					<li>Local filesystem storage for captures, tiles, detections, and logs</li>
+					<li>Excel-based logging via <code>pandas</code> (<code>data/exuvia_log.xlsx</code>)</li>
+				</ul>
+			</div>
+			<div class="tech-block">
+				<h3>CV Pipeline</h3>
+				<ul class="goal-list">
+					<li>Ultralytics YOLO11 detection model</li>
+					<li>15,000+ human-labelled exuvia (supervised + semi-supervised training)</li>
+					<li>Tiled inference for small-object recall; NMS for duplicate suppression</li>
+					<li>mAP-50: <strong>92%</strong> · Precision & Recall: <strong>>90%</strong></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="figures-stack">
+			<figure class="figure">
+				<img src="/images/labelledexuvia.jpg" alt="YOLO11 detection output showing bounding boxes over exuvia" class="figure-img" />
+				<figcaption>YOLO11 detection output. Each bounding box is one detected exuvia. Tiled inference maintains accuracy on high-density trays where objects cluster closely together.</figcaption>
+			</figure>
+			<figure class="figure">
+				<img src="/images/webapp.png" alt="Streamlit web app showing count result and batch statistics" class="figure-img" />
+				<figcaption>The Streamlit web app, accessible from any networked device. Displays count estimate, confidence interval, annotated image output, and batch statistics with one-click export.</figcaption>
+			</figure>
+		</div>
+	</section>
+
+	<!-- ── My Role ── -->
+	<section class="section">
+		<p class="section-label">My Contributions</p>
+		<h2>What I Built</h2>
+		<p>
+			I served as the project lead and was directly responsible for the majority of the system's technical execution. Specifically: I designed and sourced the imaging setup (HQ Camera, FA lens, C-mount assembly), interfaced all hardware with the Raspberry Pi 5, and physically designed and manufactured the 3D-printed overhead camera mount. I built and curated the 15,000+ image training dataset through manual labelling, trained and tuned the YOLO11 detection model, and implemented the full inference pipeline with tiled detection and duplicate suppression. I also designed and built the Streamlit web application end-to-end, including the statistics suite, data export functionality, and user documentation, and conducted the final on-site calibration session with the client to ensure the system worked in their real operational environment.
+		</p>
+	</section>
+
+	<hr class="divider" />
+
+	<!-- ── Outcomes ── -->
+	<section class="section">
+		<p class="section-label">Results</p>
+		<h2>Outcomes</h2>
+		<div class="outcomes-grid">
+			<div class="outcome-card">
+				<span class="outcome-value">92%</span>
+				<span class="outcome-label">mAP-50 detection accuracy</span>
+			</div>
+			<div class="outcome-card">
+				<span class="outcome-value">&gt;90%</span>
+				<span class="outcome-label">Precision & Recall</span>
+			</div>
+			<div class="outcome-card">
+				<span class="outcome-value">15k+</span>
+				<span class="outcome-label">Labelled training samples</span>
+			</div>
+			<div class="outcome-card">
+				<span class="outcome-value">2M</span>
+				<span class="outcome-label">Moths tracked daily by OKSIR</span>
+			</div>
+		</div>
+		<p style="margin-top:1.5rem;">
+			The system meets and exceeds all three of OKSIR's core requirements: it outperforms the manual method on both speed and accuracy, produces exportable batch statistics, and was designed from the outset to be approachable for staff with no technical background. The client received full documentation and a user manual for independent long-term operation.
+		</p>
+	</section>
+
+	<!-- ── Links ── -->
+	<section class="section">
+		<p class="section-label">Resources</p>
+		<h2>Links & Code</h2>
+		<div class="link-list">
+			<a href="https://github.com/eccemono" class="link-card" target="_blank" rel="noopener noreferrer">
+				<span>🐙</span>
+				<div>
+					<strong>GitHub</strong>
+					<p>Source code and project documentation</p>
+				</div>
+			</a>
+		</div>
+	</section>
+
+	<hr class="divider" />
+
+	<!-- ── Reflection ── -->
+	<section class="section">
+		<details class="reflection-details">
+			<summary>
+				<span class="section-label" style="display:inline">Personal Reflection</span>
+				<h2 style="display:inline; margin-left: 0.5rem;">Looking Back, Moving Forward</h2>
+			</summary>
+
+			<div class="reflection-body">
+				<div class="q-section">
+					<p class="section-label">On Design</p>
+					<h3>What did you learn about the design process?</h3>
+					<p>I learned that the problem defines the solution, not the other way around. When we started, the answer seemed obvious: take a photo, count. But the moment I actually looked at what we were imaging, small semi-translucent shells on a textured surface, everything changed. We needed a controlled environment, a fixed geometry, a proper lens. The project kept redirecting us back to the actual problem, and that is something I will carry into every project I take on.</p>
+				</div>
+
+				<hr class="divider" />
+
+				<div class="q-section">
+					<p class="section-label">On Engineering</p>
+					<h3>What are the most important attributes of an engineer?</h3>
+					<p>I think it's being human. Sure, this project would give me a grade at the end of the day and I could have treated it as just a task to get done. But going there, interacting with the client and hearing the lab tech changed that. It may not be world changing, but counting exuvia is a genuine issue they have, and they seemed so excited to see it being potentially solved. From that moment on, it was less an engineering job and more my duty to ensure I don't cut any corners and give them the best functioning exuvia counter I can.</p>
+				</div>
+
+				<hr class="divider" />
+
+				<div class="q-section">
+					<p class="section-label">On Responsibility</p>
+					<h3>How has this experience shaped your understanding of the engineer's role in society?</h3>
+					<p>Engineers have the power to shape the world. We can sharpen our skills and use them to hear people, understand their struggles, and think about how we can play a part in helping them out. Our client wasn't asking for a machine learning pipeline. They were asking to stop counting tiny shells by hand. That gap between what I could build and what they actually needed taught me what engineering responsibility looks like in practice.</p>
+				</div>
+
+				<hr class="divider" />
+
+				<div class="q-section">
+					<p class="section-label">On Growth</p>
+					<h3>Strengths, growth areas, and a path forward</h3>
+					<p>I think I listen to the client's problems and am very much a perspectivist. I won't stop until I feel like I have totally understood what they're looking for. The more open-ended the better: I will consult whatever I need to, build a prototype, and give it to them in a way they will actually be able to make use and sense out of. Where I need to grow is in formally communicating that work. Writing it up, presenting it persuasively. I plan to be more deliberate about documentation as I go, rather than treating it as something to do at the end.</p>
+				</div>
+			</div>
+		</details>
+	</section>
+</Layout>
+
+<style>
+	h1 {
+		font-size: 2.2rem;
+		letter-spacing: -0.03em;
+		margin-bottom: 0.6rem;
+	}
+
+	.subtitle {
+		color: var(--color-text-muted);
+		font-size: 1.05rem;
+		margin-bottom: 1rem;
+		max-width: 620px;
+	}
+
+	.meta-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+		margin-top: 0.5rem;
+	}
+
+	.para-gap {
+		margin-top: 1rem;
+	}
+
+	/* ── Goals ── */
+	.goal-list {
+		padding-left: 1.25rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.6rem;
+		margin-top: 0.5rem;
+	}
+
+	.goal-list li {
+		color: var(--color-text);
+		line-height: 1.6;
+	}
+
+	/* ── Timeline ── */
+	.timeline {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+		margin-top: 2rem;
+		padding-left: 1.5rem;
+		border-left: 2px solid var(--color-border);
+	}
+
+	.iteration-header {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-bottom: 0.75rem;
+	}
+
+	.iteration-badge {
+		background: var(--color-accent);
+		color: #fff;
+		font-size: 0.7rem;
+		font-weight: 700;
+		padding: 0.2rem 0.6rem;
+		border-radius: 6px;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+	}
+
+	.iteration h3 {
+		font-size: 1.15rem;
+	}
+
+	/* ── Tech Stack ── */
+	.tech-stack {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+		gap: 1.25rem;
+		margin-top: 1.5rem;
+		margin-bottom: 2rem;
+	}
+
+	.tech-block {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: 12px;
+		padding: 1.25rem;
+	}
+
+	.tech-block h3 {
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--color-accent-light);
+		margin-bottom: 0.75rem;
+		font-weight: 600;
+	}
+
+	code {
+		background: rgba(108, 99, 255, 0.15);
+		color: var(--color-accent-light);
+		padding: 0.1rem 0.4rem;
+		border-radius: 4px;
+		font-size: 0.85em;
+		font-family: monospace;
+	}
+
+	/* ── Figures ── */
+	.figure {
+		margin-top: 1.5rem;
+	}
+
+	.figure-img {
+		width: 100%;
+		border-radius: 8px;
+		display: block;
+		border: 1px solid var(--color-border);
+	}
+
+	.figures-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 1.5rem;
+		margin-top: 1.5rem;
+	}
+
+	.figures-stack {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		margin-top: 1.5rem;
+	}
+
+	figcaption {
+		font-size: 0.82rem;
+		color: var(--color-text-muted);
+		margin-top: 0.6rem;
+		font-style: italic;
+		line-height: 1.5;
+	}
+
+	/* ── Outcomes ── */
+	.outcomes-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+		gap: 1rem;
+	}
+
+	.outcome-card {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: 12px;
+		padding: 1.25rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+		text-align: center;
+	}
+
+	.outcome-value {
+		font-size: 1.9rem;
+		font-weight: 700;
+		color: var(--color-accent-light);
+		line-height: 1;
+	}
+
+	.outcome-label {
+		font-size: 0.78rem;
+		color: var(--color-text-muted);
+		line-height: 1.4;
+	}
+
+	/* ── Links ── */
+	.link-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		margin-top: 0.75rem;
+	}
+
+	.link-card {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: 10px;
+		padding: 1rem 1.25rem;
+		color: var(--color-text);
+		transition: border-color 0.2s;
+	}
+
+	.link-card:hover {
+		border-color: var(--color-accent);
+		text-decoration: none;
+	}
+
+	.link-card > span:first-child {
+		font-size: 1.3rem;
+	}
+
+	.link-card p {
+		font-size: 0.83rem;
+		color: var(--color-text-muted);
+		margin-top: 0.1rem;
+	}
+
+	/* ── Reflection dropdown ── */
+	.reflection-details {
+		border: 1px solid var(--color-border);
+		border-radius: 12px;
+		padding: 1.25rem 1.5rem;
+		background: var(--color-surface);
+	}
+
+	.reflection-details summary {
+		cursor: pointer;
+		list-style: none;
+		display: flex;
+		align-items: baseline;
+		gap: 0.75rem;
+		user-select: none;
+	}
+
+	.reflection-details summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.reflection-details summary::before {
+		content: '▶';
+		font-size: 0.7rem;
+		color: var(--color-accent);
+		transition: transform 0.2s;
+		display: inline-block;
+		margin-right: 0.25rem;
+	}
+
+	.reflection-details[open] summary::before {
+		transform: rotate(90deg);
+	}
+
+	.reflection-body {
+		max-width: 680px;
+		margin-top: 1.5rem;
+	}
+
+	.q-section {
+		margin-bottom: 0.5rem;
+	}
+
+	.q-section h3 {
+		font-size: 1.15rem;
+		margin-bottom: 0.75rem;
+		color: var(--color-text);
+	}
+
+	.q-section p {
+		color: var(--color-text-muted);
+		line-height: 1.85;
+		font-size: 0.97rem;
+	}
+</style>
+

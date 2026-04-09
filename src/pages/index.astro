@@ -1,11 +1,323 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="About Me">
+	<!-- ── Hero ── -->
+	<section class="hero section">
+		<div class="hero-photo">
+			<img src="/images/headshot.jpg" alt="Shreyas" class="headshot" />
+		</div>
+		<div class="hero-text">
+			<p class="section-label">ePortfolio</p>
+			<h1>Hi, I'm <span class="accent">Shreyas</span></h1>
+			<p class="hero-tagline">
+				Final-year Electrical Engineering student at UBC Okanagan.
+			</p>
+			<div class="cta-row">
+				<a href="/project" class="btn btn-primary">View My Most Recent Project</a>
+				<a href="#contact" class="btn btn-ghost">Get in Touch</a>
+			</div>
+		</div>
+	</section>
+
+	<hr class="divider" />
+
+	<!-- ── Bio ── -->
+	<section class="section">
+		<p class="section-label">Who I Am</p>
+		<h2>About Me</h2>
+		<p>
+			I'm a final-year Electrical Engineering student at UBC Okanagan. I'm Indian from Hong Kong & Singapore, now based in Kelowna, BC, Canada. I'm good at being thrown into the deep end and learning my way around tools.
+		</p>
+		<p class="para-gap">
+			I'm hoping to get into anything that is meaningful, exciting, and solving a real world issue. Agricultural Engineering has caught my eye lately, though I'm quite open-ended and will take up any project that looks exciting.
+		</p>
+	</section>
+
+	<!-- ── Skills ── -->
+	<section class="section">
+		<p class="section-label">Toolkit</p>
+		<h2>Skills & Tools</h2>
+		<div class="skills-grid">
+			<div class="skill-group">
+				<h3>Hardware</h3>
+				<div class="chips">
+					<span class="chip">PCB Design</span>
+					<span class="chip">Soldering</span>
+					<span class="chip">3D Printing</span>
+					<span class="chip">CNC Routing</span>
+					<span class="chip">Raspberry Pi / SBC</span>
+					<span class="chip">Hobbyist Avionics</span>
+				</div>
+			</div>
+			<div class="skill-group">
+				<h3>Software</h3>
+				<div class="chips">
+					<span class="chip">Python</span>
+					<span class="chip">Streamlit</span>
+					<span class="chip">OpenCV</span>
+					<span class="chip">YOLO / ML</span>
+					<span class="chip">pandas / NumPy</span>
+				</div>
+			</div>
+			<div class="skill-group">
+				<h3>Manufacturing</h3>
+				<div class="chips">
+					<span class="chip">Carbon Fibre Layup</span>
+					<span class="chip">Mould Making</span>
+					<span class="chip">Lens Optics</span>
+					<span class="chip">Mechanical Assembly</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ── Career Aspirations ── -->
+	<section class="section">
+		<p class="section-label">Looking Ahead</p>
+		<h2>Career Aspirations</h2>
+		<p>
+			I want to get into work that is meaningful, exciting, and solving a real world issue. Agricultural Engineering has caught my eye, though I am quite open-ended and will pick up any project that looks exciting. I'm good at being thrown into the deep end and learning my way around tools.
+		</p>
+	</section>
+
+	<!-- ── Projects ── -->
+	<section class="section">
+		<p class="section-label">Work</p>
+		<h2>Projects & Experience</h2>
+		<div class="project-list">
+			<div class="card">
+				<div class="card-header">
+					<strong>OKSIR Exuvia Counter</strong>
+					<span class="chip">Capstone 2025–26</span>
+				</div>
+				<p class="card-desc">
+					Computer vision system to automate coddling moth exuvia counting for BC's sterile insect release program. Built on Raspberry Pi 5 with a YOLO model trained on 15,000+ labelled samples.
+				</p>
+				<a href="/project" class="card-link">Read more →</a>
+			</div>
+			<div class="card">
+				<div class="card-header">
+							<strong>UBCO Aerospace Club: Helicopter</strong>
+					<span class="chip">Competition</span>
+				</div>
+				<p class="card-desc">
+					Built a 2 m-wingspan model helicopter with a CNC-machined carbon fibre shell. Represented UBCO at a national competition in Quebec, handling manufacturing and avionics integration.
+				</p>
+			</div>
+			<div class="card">
+				<div class="card-header">
+					<strong>Model Rocketry</strong>
+					<span class="chip">UBCO Aerospace</span>
+				</div>
+				<p class="card-desc">
+					Designed and launched high-power rockets using E- and F-class motors with hands-on experience in avionics, recovery systems, and airframe fabrication.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<hr class="divider" />
+
+	<!-- ── Personal Interests ── -->
+	<section class="section">
+		<p class="section-label">Beyond Engineering</p>
+		<h2>Personal Interests</h2>
+		<p>
+			I practice a martial art called <strong>Kendo</strong>, I'm a certified <strong>scuba diver</strong>, and I brew <strong>kombucha</strong> at home. I love to be open-ended in my approach and try out a variety of hobbies.
+		</p>
+		<p class="para-gap">
+			I'm an avid reader of <strong>analytical psychology, socionics and philosophy</strong>. I love old comedy and have a particular affection for the playwright <strong>Aristophanes</strong>.
+		</p>
+	</section>
+
+	<!-- ── Contact ── -->
+	<section class="section" id="contact">
+		<p class="section-label">Reach Out</p>
+		<h2>Contact</h2>
+		<p>I'm always open to connecting — feel free to reach out.</p>
+		<div class="contact-list">
+			<a href="mailto:eccemono3999@gmail.com" class="contact-item">
+				<span class="contact-icon">✉</span>
+				eccemono3999@gmail.com
+			</a>
+			<a href="https://github.com/eccemono" class="contact-item" target="_blank" rel="noopener noreferrer">
+				<span class="contact-icon">⌥</span>
+				github.com/eccemono
+			</a>
+		</div>
+	</section>
 </Layout>
+
+<style>
+	/* ── Hero ── */
+	.hero {
+		display: flex;
+		align-items: center;
+		gap: 2.5rem;
+		flex-wrap: wrap;
+	}
+
+	.headshot {
+		width: 140px;
+		height: 140px;
+		border-radius: 50%;
+		object-fit: cover;
+		border: 2px solid var(--color-border);
+		flex-shrink: 0;
+	}
+
+	.hero-text {
+		flex: 1;
+		min-width: 260px;
+	}
+
+	h1 {
+		font-size: 2.6rem;
+		letter-spacing: -0.03em;
+		margin-bottom: 0.5rem;
+	}
+
+	.accent {
+		color: var(--color-accent-light);
+	}
+
+	.hero-tagline {
+		color: var(--color-text-muted);
+		font-size: 1.05rem;
+		margin-bottom: 1.5rem;
+		max-width: 480px;
+	}
+
+	.cta-row {
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.btn {
+		padding: 0.55rem 1.4rem;
+		border-radius: 8px;
+		font-size: 0.9rem;
+		font-weight: 600;
+		transition: opacity 0.2s;
+	}
+
+	.btn:hover {
+		opacity: 0.8;
+		text-decoration: none;
+	}
+
+	.btn-primary {
+		background: var(--color-accent);
+		color: #fff;
+	}
+
+	.btn-ghost {
+		background: transparent;
+		border: 1px solid var(--color-border);
+		color: var(--color-text-muted);
+	}
+
+	/* ── Typography ── */
+	.para-gap {
+		margin-top: 1rem;
+	}
+
+	/* ── Cards ── */
+	.card {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: 12px;
+		padding: 1.25rem 1.5rem;
+		margin-bottom: 1rem;
+		transition: border-color 0.2s;
+	}
+
+	.card:hover {
+		border-color: var(--color-accent);
+	}
+
+	.card-header {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-bottom: 0.5rem;
+		flex-wrap: wrap;
+	}
+
+	.card-desc {
+		color: var(--color-text-muted);
+		font-size: 0.9rem;
+		margin-bottom: 0.6rem;
+	}
+
+	.card-link {
+		font-size: 0.85rem;
+	}
+
+	/* ── Skills ── */
+	.skills-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1.5rem;
+	}
+
+	.skill-group h3 {
+		font-size: 0.8rem;
+		color: var(--color-text-muted);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		margin-bottom: 0.75rem;
+		font-weight: 600;
+	}
+
+	.chips {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.3rem;
+	}
+
+	/* ── Project list ── */
+	.project-list {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 1rem;
+	}
+
+	/* ── Contact ── */
+	.contact-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		margin-top: 1.25rem;
+	}
+
+	.contact-item {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		color: var(--color-text-muted);
+		font-size: 0.95rem;
+		transition: color 0.2s;
+	}
+
+	.contact-item:hover {
+		color: var(--color-accent-light);
+		text-decoration: none;
+	}
+
+	.contact-icon {
+		width: 32px;
+		height: 32px;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: 8px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 0.9rem;
+		flex-shrink: 0;
+	}
+</style>
