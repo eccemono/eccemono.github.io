@@ -11,9 +11,9 @@ import Layout from '../layouts/Layout.astro';
 		<div class="hero-text">
 			<p class="section-label">ePortfolio</p>
 			<h1>Hi, I'm <span class="accent">Shreyas</span></h1>
-			<p class="hero-tagline">
-				Final-year Electrical Engineering student at UBC Okanagan.
-			</p>
+			<blockquote class="hero-quote">
+				"If it only works in ideal conditions, it doesn't really work."
+			</blockquote>
 			<div class="cta-row">
 				<a href="/project" class="btn btn-primary">View My Most Recent Project</a>
 				<a href="#contact" class="btn btn-ghost">Get in Touch</a>
@@ -28,7 +28,7 @@ import Layout from '../layouts/Layout.astro';
 		<p class="section-label">Who I Am</p>
 		<h2>About Me</h2>
 		<p>
-			I'm a final-year Electrical Engineering student at UBC Okanagan. I'm Indian from Hong Kong & Singapore, now based in Kelowna, BC, Canada. I'm good at being thrown into the deep end and learning my way around tools.
+			I'm a final-year Electrical Engineering student at UBC Okanagan. I'm Indian from Hong Kong & Singapore, now based in Kelowna, BC, Canada. My focus is applied systems engineering: building things that hold up under real conditions, with attention to detail and a willingness to iterate until it actually works.
 		</p>
 		<p class="para-gap">
 			I'm hoping to get into anything that is meaningful, exciting, and solving a real world issue. Agricultural Engineering has caught my eye lately, though I'm quite open-ended and will take up any project that looks exciting.
@@ -184,11 +184,15 @@ import Layout from '../layouts/Layout.astro';
 		color: var(--color-accent-light);
 	}
 
-	.hero-tagline {
+	.hero-quote {
 		color: var(--color-text-muted);
-		font-size: 1.05rem;
-		margin-bottom: 1.5rem;
-		max-width: 480px;
+		font-size: 1rem;
+		font-style: italic;
+		margin: 0 0 1.5rem 0;
+		padding-left: 1rem;
+		border-left: 3px solid var(--color-accent);
+		max-width: 460px;
+		line-height: 1.6;
 	}
 
 	.cta-row {
