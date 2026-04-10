@@ -13,7 +13,7 @@ import Layout from '../layouts/Layout.astro';
 		<div class="meta-row">
 			<span class="chip">Computer Vision</span>
 			<span class="chip">Raspberry Pi 5</span>
-			<span class="chip">YOLO11</span>
+			<span class="chip">YOLO26</span>
 			<span class="chip">Streamlit</span>
 			<span class="chip">Team of 5</span>
 		</div>
@@ -152,7 +152,7 @@ import Layout from '../layouts/Layout.astro';
 			<div class="tech-block">
 				<h3>CV Pipeline</h3>
 				<ul class="goal-list">
-					<li>Ultralytics YOLO11 detection model</li>
+					<li>Ultralytics YOLO26 detection model (trialled YOLO8, YOLO11, and YOLO26 — YOLO26 gave the best performance)</li>
 					<li>15,000+ human-labelled exuvia (supervised + semi-supervised training)</li>
 					<li>Tiled inference for small-object recall; NMS for duplicate suppression</li>
 					<li>mAP-50: <strong>92%</strong> · Precision & Recall: <strong>>90%</strong></li>
@@ -162,8 +162,8 @@ import Layout from '../layouts/Layout.astro';
 
 		<div class="figures-stack">
 			<figure class="figure">
-				<img src="/images/labelledexuvia.jpg" alt="YOLO11 detection output showing bounding boxes over exuvia" class="figure-img" />
-				<figcaption>YOLO11 detection output. Each bounding box is one detected exuvia. Tiled inference maintains accuracy on high-density trays where objects cluster closely together.</figcaption>
+				<img src="/images/labelledexuvia.jpg" alt="YOLO26 detection output showing bounding boxes over exuvia" class="figure-img" />
+				<figcaption>YOLO26 detection output. Each bounding box is one detected exuvia. Tiled inference maintains accuracy on high-density trays where objects cluster closely together.</figcaption>
 			</figure>
 			<figure class="figure">
 				<img src="/images/webapp.png" alt="Streamlit web app showing count result and batch statistics" class="figure-img" />
@@ -177,7 +177,7 @@ import Layout from '../layouts/Layout.astro';
 		<p class="section-label">My Contributions</p>
 		<h2>What I Built</h2>
 		<p>
-			I served as the project lead and was directly responsible for the majority of the system's technical execution. Specifically: I designed and sourced the imaging setup (HQ Camera, FA lens, C-mount assembly), interfaced all hardware with the Raspberry Pi 5, and physically designed and manufactured the 3D-printed overhead camera mount. I built and curated the 15,000+ image training dataset through manual labelling, trained and tuned the YOLO11 detection model, and implemented the full inference pipeline with tiled detection and duplicate suppression. I also designed and built the Streamlit web application end-to-end, including the statistics suite, data export functionality, and user documentation, and conducted the final on-site calibration session with the client to ensure the system worked in their real operational environment.
+			I served as the project lead and was directly responsible for the majority of the system's technical execution. Specifically: I designed and sourced the imaging setup (HQ Camera, FA lens, C-mount assembly), interfaced all hardware with the Raspberry Pi 5, and physically designed and manufactured the 3D-printed overhead camera mount. I built and curated the 15,000+ image training dataset through manual labelling, trained and tuned the YOLO26 detection model, and implemented the full inference pipeline with tiled detection and duplicate suppression. I also designed and built the Streamlit web application end-to-end, including the statistics suite, data export functionality, and user documentation, and conducted the final on-site calibration session with the client to ensure the system worked in their real operational environment.
 		</p>
 	</section>
 
